@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,8 @@ import com.karaiman.shoppingcart.dao.ProductDAO;
 import com.karaiman.shoppingcart.entity.Product;
 import com.karaiman.shoppingcart.form.CustomerForm;
 import com.karaiman.shoppingcart.form.CustomerFormValidator;
+import com.karaiman.shoppingcart.form.ProductForm;
+import com.karaiman.shoppingcart.form.ProductFormValidator;
 import com.karaiman.shoppingcart.model.CartInfo;
 import com.karaiman.shoppingcart.model.CustomerInfo;
 import com.karaiman.shoppingcart.model.ProductInfo;
@@ -42,6 +45,9 @@ public class MainController {
 
 	@Autowired
 	private CustomerFormValidator customerFormValidator;
+	
+	@Autowired
+	private ProductFormValidator productFormValidator;
 
 	@InitBinder
 	public void myInitBinder(WebDataBinder dataBinder) {
@@ -56,11 +62,16 @@ public class MainController {
 		if (target.getClass() == CartInfo.class) {
 
 		}
-
 		// Case save customer information.
 		// (@ModelAttribute @Validated CustomerInfo customerForm)
 		else if (target.getClass() == CustomerForm.class) {
 			dataBinder.setValidator(customerFormValidator);
+		}
+		
+		if (target.getClass() == ProductInfo.class) {
+
+		} else if (target.getClass() == ProductForm.class) {
+			dataBinder.setValidator(productFormValidator);
 		}
 
 	}
@@ -149,6 +160,48 @@ public class MainController {
 
 		return "redirect:/shoppingCart";
 	}
+	
+	// GET: Show product.
+	   @RequestMapping(value = { "/product" }, method = RequestMethod.GET)
+	   public String product(Model model, @RequestParam(value = "code", defaultValue = "") String code) {
+	      ProductForm productForm = null;
+	 
+	      if (code != null && code.length() > 0) {
+	         Product product = productDAO.findProduct(code);
+	         if (product != null) {
+	            productForm = new ProductForm(product);
+	         }
+	      }
+	      if (productForm == null) {
+	         productForm = new ProductForm();
+	         productForm.setNewProduct(true);
+	      }
+	      model.addAttribute("productForm", productForm);
+	      return "/product";
+	   }
+	 
+	   // POST: Save product
+	   @RequestMapping(value = { "/product" }, method = RequestMethod.POST)
+	   public String productSave(Model model, //
+	         @ModelAttribute("productForm") @Validated ProductForm productForm, //
+	         BindingResult result, //
+	         final RedirectAttributes redirectAttributes) {
+	 
+	      if (result.hasErrors()) {
+	         return "/product";
+	      }
+	      try {
+	         productDAO.save(productForm);
+	      } catch (Exception e) {
+	         Throwable rootCause = ExceptionUtils.getRootCause(e);
+	         String message = rootCause.getMessage();
+	         model.addAttribute("errorMessage", message);
+	         // Show product form.
+	         return "/product";
+	      }
+	 
+	      return "redirect:/productList";
+	   }
 
 	// GET: Show cart.
 	@RequestMapping(value = { "/shoppingCart" }, method = RequestMethod.GET)

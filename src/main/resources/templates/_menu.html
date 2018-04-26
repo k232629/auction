@@ -23,4 +23,10 @@
       </a>
       |
    </th:block>
+    <th:block sec:authorize="hasRole('ROLE_EMPLOYEE')">
+      <a th:href="@{/product}">
+      PLACE LOT
+      </a>
+      |
+   </th:block>
 </div>
