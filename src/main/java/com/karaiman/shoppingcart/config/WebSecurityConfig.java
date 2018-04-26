@@ -49,6 +49,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
       // But access to the page requires the YY role,
       // An AccessDeniedException will be thrown.
       http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
+     
+      http.authorizeRequests()
+      	.antMatchers("/registartion").permitAll();
  
       // Configuration for Login Form.
       http.authorizeRequests().and().formLogin()//

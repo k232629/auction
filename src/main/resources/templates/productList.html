@@ -3,14 +3,21 @@
    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
    <head>
       <meta charset="UTF-8">
-      <title>Product List</title>
+      <title>All lots</title>
       <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
    </head>
    <body>
       <th:block th:include="/_header"></th:block>
       <th:block th:include="/_menu"></th:block>
        
-      <div class="page-title">Product List</div>
+      <h1>All Lots</h1>
        
       <div class="product-preview-container" th:each="prodInfo : ${paginationProducts.list}">
          <ul>
@@ -32,7 +39,7 @@
          </ul>
       </div>
        
-      <br/>
+     <!--  <br/>
       <div class="page-navigator" th:if="${paginationProducts.totalPages > 1}">
          <th:block th:each="page : ${paginationProducts.navigationPages}">
          
@@ -42,9 +49,8 @@
             <span class="nav-item" th:if="${page == -1}"> ... </span>
              
          </th:block>
-      </div>
+      </div> -->
        
-      <th:block th:include="/_footer"></th:block>
-       
+
    </body>
 </html>

@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,11 +20,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.karaiman.shoppingcart.dao.AccountDAO;
 import com.karaiman.shoppingcart.dao.OrderDAO;
 import com.karaiman.shoppingcart.dao.ProductDAO;
+import com.karaiman.shoppingcart.entity.Account;
 import com.karaiman.shoppingcart.entity.Product;
 import com.karaiman.shoppingcart.form.CustomerForm;
 import com.karaiman.shoppingcart.form.CustomerFormValidator;
+import com.karaiman.shoppingcart.form.ProductForm;
+import com.karaiman.shoppingcart.form.RegistrationForm;
 import com.karaiman.shoppingcart.model.CartInfo;
 import com.karaiman.shoppingcart.model.CustomerInfo;
 import com.karaiman.shoppingcart.model.ProductInfo;
@@ -39,6 +44,9 @@ public class MainController {
 
 	@Autowired
 	private ProductDAO productDAO;
+	
+	@Autowired
+	private AccountDAO accountDAO;
 
 	@Autowired
 	private CustomerFormValidator customerFormValidator;
@@ -69,6 +77,35 @@ public class MainController {
 	public String accessDenied() {
 		return "/403";
 	}
+	
+	// GET: Show Login Page
+	   @RequestMapping(value = { "/registration" }, method = RequestMethod.GET)
+	   public String register(Model model) {
+	 
+	      return "/registration";
+	   }
+	
+	@RequestMapping(value = { "/registration" }, method = RequestMethod.POST)
+	   public String accountSave(Model model, //
+	         @ModelAttribute("registrationForm") @Validated RegistrationForm regForm, //
+	         BindingResult result, //
+	         final RedirectAttributes redirectAttributes) {
+	 
+	      if (result.hasErrors()) {
+	         return "/registartion";
+	      }
+	      try {
+	         accountDAO.save(regForm);
+	      } catch (Exception e) {
+	         Throwable rootCause = ExceptionUtils.getRootCause(e);
+	         String message = rootCause.getMessage();
+	         model.addAttribute("errorMessage", message);
+	         // Show product form.
+	         return "/registration";
+	      }
+	 
+	      return "redirect:/productList";
+	   }
 
 	@RequestMapping("/")
 	public String home() {

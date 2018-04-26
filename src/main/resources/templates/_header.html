@@ -1,20 +1,42 @@
-<div class="header-container"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
- 
-   <div class="site-name">Online Shop</div>
-   
-   <div class="header-bar">
-      <th:block sec:authorize="isAuthenticated()">
+<div class="header-container" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+	<!-- <div class="site-name">KMA-AUCTION</div> -->
+
+	<!-- <div class="navbar-header">
+		<th:block sec:authorize="isAuthenticated()">
          Hello
-         <a th:href="@{/admin/accountInfo}" th:utext="${#request.userPrincipal.name}">..</a>
+         <a th:href="@{/admin/accountInfo}"
+				th:utext="${#request.userPrincipal.name}">..</a>
          &nbsp;|&nbsp;
          <a th:href="@{/admin/logout}">Logout</a>
-      </th:block>
-       
-      <th:block sec:authorize="!isAuthenticated()">
-         <a th:href="@{/admin/login}">Login</a>
-      </th:block>
-   </div>
-   
+		</th:block>
+
+		<th:block sec:authorize="!isAuthenticated()">
+			<a th:href="@{/admin/login}">Login</a>
+		</th:block>
+
+		<th:block sec:authorize="!isAuthenticated()">
+			<a th:href="@{/admin/login}">Sign up</a>
+		</th:block>
+
+	</div> -->
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">KMA-AUCTION</a>
+			</div>
+			<ul class="nav navbar-nav">
+					<li sec:authorize="isAuthenticated()"><span><a th:href="@{/admin/accountInfo}"
+					th:utext="${#request.userPrincipal.name}">..</a>
+         			<a th:href="@{/admin/logout}">Logout</a></span>
+					</li>
+				<li sec:authorize="!isAuthenticated()"><a th:href="@{/admin/login}">Log in</a></li>
+				<li sec:authorize="!isAuthenticated()"><a th:href="@{/admin/login}">Sign up</a></li>
+			</ul>
+		</div>
+	</nav>
+
+
+
 </div>

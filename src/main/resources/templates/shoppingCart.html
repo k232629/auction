@@ -2,18 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org">
    <head>
       <meta charset="UTF-8">
-      <title>Shopping Cart</title>
-      <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+      <title>My Lots</title>
+     <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
    </head>
    <body>
       <th:block th:include="/_header"></th:block>
       <th:block th:include="/_menu"></th:block>
        
-      <div class="page-title">My Cart</div>
+      <div class="page-title">My Lots</div>
        
       <th:block th:if="${cartForm == null || cartForm.cartLines == null || cartForm.cartLines.empty}">
-         <h2>There is no items in Cart</h2>
-         <a th:href="@{/productList}">Show Product List</a>
+         <h3 style="align:center">There is no bids for any lot</h3>
+         <a style="align:center" th:href="@{/productList}">Show all lots</a>
       </th:block>
        
       <th:block th:if="${cartForm != null && cartForm.cartLines != null && !cartForm.cartLines.empty}">
@@ -63,7 +70,6 @@
          </form>
       </th:block>
        
-      <th:block th:include="/_footer"></th:block>
        
    </body>
 </html>
