@@ -16,7 +16,6 @@
          <ul>
             <li><img class="product-image"
                th:src="@{|/productImage?code=${prodInfo.code}|}" /></li>
-            <!--<li>Code: <span th:utext="${prodInfo.code}"></span></li>-->
             <li>Name: <span th:utext="${prodInfo.name}"></span></li>
             <li th:if="${!prodInfo.code.equals(codeToEdit)}">
                Highest bid: <span th:utext="${prodInfo.price}"></span>
@@ -39,16 +38,13 @@
                </form>
             </li>
 
-            <!--<li th:if="${prodInfo.code.equals(codeToEdit)}">-->
-               <!--<a th:href="@{|/placeBidSubmit?code=${prodInfo.code}&&price=${prodInfo.price}&&newPrice=${prodInfo.}|}">Submit bid</a>-->
-            <!--</li>-->
-            <!-- For Manager edit Product -->
-            <th:block sec:authorize="hasAuthority('ROLE_MANAGER')">
-               <li>
-                 <a style="color:red;"
-                    th:href="@{|/admin/product?code=${prodInfo.code}|}">Edit Product</a>
-               </li>
-            </th:block>
+            <!-- For Manager change for 'delete lot' -->
+            <!--<th:block sec:authorize="hasAuthority('ROLE_MANAGER')">-->
+               <!--<li>-->
+                 <!--<a style="color:red;"-->
+                    <!--th:href="@{|/admin/product?code=${prodInfo.code}|}">Edit Product</a>-->
+               <!--</li>-->
+            <!--</th:block>-->
          </ul>
       </div>
        
