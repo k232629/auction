@@ -116,7 +116,7 @@ public class AdminController {
    public String deleteProduct(Model model, @RequestParam(value = "code", defaultValue = "") String code) {
 
       productDAO.delete(code);
-      return "redirect:productList";
+      return "redirect:/productList";
    }
  
    // POST: Save product
