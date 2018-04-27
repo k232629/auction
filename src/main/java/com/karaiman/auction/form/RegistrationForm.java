@@ -1,6 +1,6 @@
-package com.karaiman.shoppingcart.form;
+package com.karaiman.auction.form;
 
-import com.karaiman.shoppingcart.entity.Account;
+import com.karaiman.auction.entity.Account;
 
 public class RegistrationForm {
 	

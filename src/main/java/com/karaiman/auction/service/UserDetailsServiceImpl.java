@@ -1,4 +1,4 @@
-package com.karaiman.shoppingcart.service;
+package com.karaiman.auction.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.karaiman.shoppingcart.dao.AccountDAO;
-import com.karaiman.shoppingcart.entity.Account;
+import com.karaiman.auction.dao.AccountDAO;
+import com.karaiman.auction.entity.Account;
  
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {

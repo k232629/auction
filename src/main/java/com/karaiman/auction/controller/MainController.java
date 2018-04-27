@@ -1,4 +1,4 @@
-package com.karaiman.shoppingcart.controller;
+package com.karaiman.auction.controller;
 
 import java.io.IOException;
 
@@ -6,8 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
-import com.karaiman.shoppingcart.form.BidForm;
-import com.karaiman.shoppingcart.form.ProductForm;
+import com.karaiman.auction.form.BidForm;
+import com.karaiman.auction.form.ProductForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,13 +24,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.karaiman.shoppingcart.dao.AccountDAO;
-import com.karaiman.shoppingcart.dao.ProductDAO;
-import com.karaiman.shoppingcart.entity.Product;
-import com.karaiman.shoppingcart.form.ProductFormValidator;
-import com.karaiman.shoppingcart.form.RegistrationForm;
-import com.karaiman.shoppingcart.model.ProductInfo;
-import com.karaiman.shoppingcart.pagination.PaginationResult;
+import com.karaiman.auction.dao.AccountDAO;
+import com.karaiman.auction.dao.ProductDAO;
+import com.karaiman.auction.entity.Product;
+import com.karaiman.auction.form.ProductFormValidator;
+import com.karaiman.auction.form.RegistrationForm;
+import com.karaiman.auction.model.ProductInfo;
+import com.karaiman.auction.pagination.PaginationResult;
 
 @Controller
 @Transactional

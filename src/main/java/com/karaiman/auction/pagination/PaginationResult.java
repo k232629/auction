@@ -1,4 +1,4 @@
-package com.karaiman.shoppingcart.pagination;
+package com.karaiman.auction.pagination;
 
 import java.util.ArrayList;
 import java.util.List;

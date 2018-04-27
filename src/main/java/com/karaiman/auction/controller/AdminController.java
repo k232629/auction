@@ -1,8 +1,6 @@
-package com.karaiman.shoppingcart.controller;
+package com.karaiman.auction.controller;
 
 
-import java.util.List;
- 
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,12 +18,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.karaiman.shoppingcart.dao.ProductDAO;
-import com.karaiman.shoppingcart.entity.Product;
-import com.karaiman.shoppingcart.form.ProductForm;
-import com.karaiman.shoppingcart.form.ProductFormValidator;
-import com.karaiman.shoppingcart.pagination.PaginationResult;
- 
+import com.karaiman.auction.dao.ProductDAO;
+import com.karaiman.auction.entity.Product;
+import com.karaiman.auction.form.ProductForm;
+import com.karaiman.auction.form.ProductFormValidator;
+
 @Controller
 @Transactional
 public class AdminController {

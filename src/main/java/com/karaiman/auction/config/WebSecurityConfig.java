@@ -1,4 +1,4 @@
-package com.karaiman.shoppingcart.config;
+package com.karaiman.auction.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.karaiman.shoppingcart.service.UserDetailsServiceImpl;
+import com.karaiman.auction.service.UserDetailsServiceImpl;
  
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {

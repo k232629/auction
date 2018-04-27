@@ -1,4 +1,4 @@
-package com.karaiman.shoppingcart.form;
+package com.karaiman.auction.form;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -6,8 +6,8 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.karaiman.shoppingcart.dao.ProductDAO;
-import com.karaiman.shoppingcart.entity.Product;
+import com.karaiman.auction.dao.ProductDAO;
+import com.karaiman.auction.entity.Product;
  
 @Component
 public class ProductFormValidator implements Validator {

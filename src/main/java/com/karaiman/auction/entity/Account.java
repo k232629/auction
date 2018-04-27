@@ -1,4 +1,4 @@
-package com.karaiman.shoppingcart.entity;
+package com.karaiman.auction.entity;
 
 import java.io.Serializable;
 

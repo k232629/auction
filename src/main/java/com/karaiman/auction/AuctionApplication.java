@@ -1,4 +1,4 @@
-package com.karaiman.shoppingcart;
+package com.karaiman.auction;
 
 import java.util.Properties;
 
@@ -26,13 +26,13 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
         HibernateJpaAutoConfiguration.class })
 
 
-public class ShoppingCartApplication {
+public class AuctionApplication {
 		
 	@Autowired
 	private Environment env;
 
 	public static void main(String[] args) {
-		SpringApplication.run(ShoppingCartApplication.class, args);
+		SpringApplication.run(AuctionApplication.class, args);
 	}
 	
 	@Bean(name = "dataSource")

@@ -1,9 +1,9 @@
-package com.karaiman.shoppingcart.form;
+package com.karaiman.auction.form;
 
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.karaiman.shoppingcart.entity.Product;
+import com.karaiman.auction.entity.Product;
  
 public class ProductForm {
     private String code;

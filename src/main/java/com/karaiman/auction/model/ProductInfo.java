@@ -1,6 +1,6 @@
-package com.karaiman.shoppingcart.model;
+package com.karaiman.auction.model;
 
-import com.karaiman.shoppingcart.entity.Product;
+import com.karaiman.auction.entity.Product;
 
 public class ProductInfo {
     private String code;

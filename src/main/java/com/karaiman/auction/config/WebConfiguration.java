@@ -1,4 +1,4 @@
-package com.karaiman.shoppingcart.config;
+package com.karaiman.auction.config;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;

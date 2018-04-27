@@ -1,11 +1,11 @@
-package com.karaiman.shoppingcart.dao;
+package com.karaiman.auction.dao;
 
 import java.io.IOException;
 import java.util.Date;
  
 import javax.persistence.NoResultException;
 
-import com.karaiman.shoppingcart.form.BidForm;
+import com.karaiman.auction.form.BidForm;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -14,10 +14,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.karaiman.shoppingcart.entity.Product;
-import com.karaiman.shoppingcart.form.ProductForm;
-import com.karaiman.shoppingcart.model.ProductInfo;
-import com.karaiman.shoppingcart.pagination.PaginationResult;
+import com.karaiman.auction.entity.Product;
+import com.karaiman.auction.form.ProductForm;
+import com.karaiman.auction.model.ProductInfo;
+import com.karaiman.auction.pagination.PaginationResult;
  
 @Transactional
 @Repository

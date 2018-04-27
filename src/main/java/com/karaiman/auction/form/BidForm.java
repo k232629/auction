@@ -1,7 +1,5 @@
-package com.karaiman.shoppingcart.form;
+package com.karaiman.auction.form;
 
-
-import com.karaiman.shoppingcart.entity.Product;
 
 public class BidForm {
     private String code;
