@@ -10,6 +10,8 @@ import org.apache.commons.lang.exception.ExceptionUtils;
 import com.karaiman.shoppingcart.form.BidForm;
 import com.karaiman.shoppingcart.form.ProductForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -179,20 +181,22 @@ public class MainController {
 	// GET: Show product.
 	   @RequestMapping(value = { "/product" }, method = RequestMethod.GET)
 	   public String product(Model model, @RequestParam(value = "code", defaultValue = "") String code) {
-	      ProductForm productForm = null;
-	 
-	      if (code != null && code.length() > 0) {
-	         Product product = productDAO.findProduct(code);
-	         if (product != null) {
-	            productForm = new ProductForm(product);
-	         }
-	      }
-	      if (productForm == null) {
-	         productForm = new ProductForm();
-	         productForm.setNewProduct(true);
-	      }
-	      model.addAttribute("productForm", productForm);
-	      return "/product";
+
+		   UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		   ProductForm productForm = null;
+
+		   Product product = productDAO.findProduct(userDetails.getUsername());
+		   if (product != null) {
+		   		productForm = new ProductForm(product);
+		   }
+		   if (productForm == null) {
+		   		productForm = new ProductForm();
+	         	productForm.setNewProduct(true);
+		   }
+
+		   model.addAttribute("productForm", productForm);
+		   return "/product";
 	   }
 	 
 	   // POST: Save product
