@@ -37,15 +37,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
  
       http.csrf().disable();
  
-      // Requires login with role ROLE_EMPLOYEE or ROLE_MANAGER.
+      // Requires login with role.
       // If not, it will redirect to /admin/login.
       http.authorizeRequests().antMatchers("/admin/orderList", "/admin/order", "/admin/accountInfo","/productList","/buyProduct",
     		  "/shoppingCartRemoveProduct","/shoppingCart","/shoppingCartCustomer","/shoppingCartConfirmation","/shoppingCartFinalize",
     		  "/productImage", "/home","/admin/product")//
             .access("hasAnyRole('ROLE_EMPLOYEE', 'ROLE_MANAGER')");
- 
-      // Pages only for MANAGER
-      //http.authorizeRequests().antMatchers("/admin/product").access("hasAnyRole('ROLE_MANAGER','ROLE_MANAGER')");
       
  
       // When user login, role XX.

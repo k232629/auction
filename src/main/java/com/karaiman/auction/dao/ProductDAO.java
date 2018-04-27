@@ -112,27 +112,16 @@ public class ProductDAO {
         session.delete(product);
     }
  
-    public PaginationResult<ProductInfo> queryProducts(int page, int maxResult, int maxNavigationPage,
-            String likeName) {
+    public PaginationResult<ProductInfo> queryProducts(int page, int maxResult, int maxNavigationPage) {
         String sql = "Select new " + ProductInfo.class.getName() //
                 + "(p.code, p.name, p.price, p.bidderCode) " + " from "//
                 + Product.class.getName() + " p ";
-        if (likeName != null && likeName.length() > 0) {
-            sql += " Where lower(p.name) like :likeName ";
-        }
         sql += " order by p.createDate desc ";
         //
         Session session = this.sessionFactory.getCurrentSession();
         Query<ProductInfo> query = session.createQuery(sql, ProductInfo.class);
- 
-        if (likeName != null && likeName.length() > 0) {
-            query.setParameter("likeName", "%" + likeName.toLowerCase() + "%");
-        }
+
         return new PaginationResult<ProductInfo>(query, page, maxResult, maxNavigationPage);
-    }
- 
-    public PaginationResult<ProductInfo> queryProducts(int page, int maxResult, int maxNavigationPage) {
-        return queryProducts(page, maxResult, maxNavigationPage, null);
     }
  
 }

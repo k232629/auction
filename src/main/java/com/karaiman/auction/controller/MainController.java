@@ -66,7 +66,6 @@ public class MainController {
 		return "/403";
 	}
 
-	// GET: Show Login Page
 	   @RequestMapping(value = { "/registration" }, method = RequestMethod.GET)
 	   public String register(Model model) {
 
@@ -107,16 +106,14 @@ public class MainController {
 	}
 	
 
-	// Product List
 	@RequestMapping({ "/productList" })
-	public String listProductHandler(Model model, //
-			@RequestParam(value = "name", defaultValue = "") String likeName,
+	public String listProductHandler(Model model,
 			@RequestParam(value = "page", defaultValue = "1") int page) {
 		final int maxResult = 5;
 		final int maxNavigationPage = 10;
 
-		PaginationResult<ProductInfo> result = productDAO.queryProducts(page, //
-				maxResult, maxNavigationPage, likeName);
+		PaginationResult<ProductInfo> result = productDAO.queryProducts(page,
+				maxResult, maxNavigationPage);
 
 		model.addAttribute("paginationProducts", result);
 		return "productList";
@@ -125,14 +122,13 @@ public class MainController {
 	@RequestMapping({ "/placeBid" })
 	public String listProductHandler(HttpServletRequest request, Model model,
 			@RequestParam(value = "code", defaultValue = "") String code,
-			@RequestParam(value = "name", defaultValue = "") String likeName,
 			@RequestParam(value = "page", defaultValue = "1") int page) {
 
 		final int maxResult = 5;
 		final int maxNavigationPage = 10;
 
-		PaginationResult<ProductInfo> result = productDAO.queryProducts(page, //
-				maxResult, maxNavigationPage, likeName);
+		PaginationResult<ProductInfo> result = productDAO.queryProducts(page,
+				maxResult, maxNavigationPage);
 
 		BidForm bidForm = new BidForm();
 
@@ -155,7 +151,6 @@ public class MainController {
 		return "redirect:/productList";
 	}
 
-	// GET: Show product.
 	   @RequestMapping(value = { "/product" }, method = RequestMethod.GET)
 	   public String product(Model model, @RequestParam(value = "code", defaultValue = "") String code) {
 
@@ -176,7 +171,6 @@ public class MainController {
 		   return "/product";
 	   }
 
-	   // POST: Save product
 	   @RequestMapping(value = { "/product" }, method = RequestMethod.POST)
 	   public String productSave(Model model, //
 	         @ModelAttribute("productForm") @Validated ProductForm productForm, //
