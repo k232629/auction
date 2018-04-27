@@ -6,11 +6,10 @@
    <a th:href="@{/productList}">
    Product List
    </a>
-   |
     <th:block sec:authorize="hasAnyRole('ROLE_MANAGER, ROLE_EMPLOYEE')">
+       |
       <a th:href="@{/product}">
       PLACE LOT
       </a>
-      |
    </th:block>
 </div>
