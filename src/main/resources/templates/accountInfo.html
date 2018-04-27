@@ -17,12 +17,6 @@
 	<div class="account-container">
 		<ul>
 			<li>User Name: <span th:utext="${#request.userPrincipal.name}"></span></li>
-			<li>Role:
-				<ul>
-					<li th:each="auth : ${userDetails.authorities}"
-						th:utext="${auth.authority}"></li>
-				</ul>
-			</li>
 		</ul>
 	</div>
 
