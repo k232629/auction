@@ -27,7 +27,6 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
 
 public class ShoppingCartApplication {
-	    //test
 		
 	@Autowired
 	private Environment env;
