@@ -25,13 +25,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.karaiman.shoppingcart.dao.AccountDAO;
 import com.karaiman.shoppingcart.dao.OrderDAO;
 import com.karaiman.shoppingcart.dao.ProductDAO;
+import com.karaiman.shoppingcart.entity.Account;
 import com.karaiman.shoppingcart.entity.Product;
 import com.karaiman.shoppingcart.form.CustomerForm;
 import com.karaiman.shoppingcart.form.CustomerFormValidator;
 import com.karaiman.shoppingcart.form.ProductForm;
 import com.karaiman.shoppingcart.form.ProductFormValidator;
+import com.karaiman.shoppingcart.form.ProductForm;
+import com.karaiman.shoppingcart.form.RegistrationForm;
 import com.karaiman.shoppingcart.model.CartInfo;
 import com.karaiman.shoppingcart.model.CustomerInfo;
 import com.karaiman.shoppingcart.model.ProductInfo;
@@ -49,8 +53,11 @@ public class MainController {
 	private ProductDAO productDAO;
 
 	@Autowired
+	private AccountDAO accountDAO;
+
+	@Autowired
 	private CustomerFormValidator customerFormValidator;
-	
+
 	@Autowired
 	private ProductFormValidator productFormValidator;
 
@@ -72,7 +79,7 @@ public class MainController {
 		else if (target.getClass() == CustomerForm.class) {
 			dataBinder.setValidator(customerFormValidator);
 		}
-		
+
 		if (target.getClass() == ProductInfo.class) {
 
 		} else if (target.getClass() == ProductForm.class) {
@@ -85,6 +92,35 @@ public class MainController {
 	public String accessDenied() {
 		return "/403";
 	}
+
+	// GET: Show Login Page
+	   @RequestMapping(value = { "/registration" }, method = RequestMethod.GET)
+	   public String register(Model model) {
+
+	      return "/registration";
+	   }
+
+	@RequestMapping(value = { "/registration" }, method = RequestMethod.POST)
+	   public String accountSave(Model model, //
+	         @ModelAttribute("registrationForm") @Validated RegistrationForm regForm, //
+	         BindingResult result, //
+	         final RedirectAttributes redirectAttributes) {
+
+	      if (result.hasErrors()) {
+	         return "/registartion";
+	      }
+	      try {
+	         accountDAO.save(regForm);
+	      } catch (Exception e) {
+	         Throwable rootCause = ExceptionUtils.getRootCause(e);
+	         String message = rootCause.getMessage();
+	         model.addAttribute("errorMessage", message);
+	         // Show product form.
+	         return "/registration";
+	      }
+
+	      return "redirect:/productList";
+	   }
 
 	@RequestMapping("/")
 	public String home() {
@@ -177,7 +213,7 @@ public class MainController {
 
 		return "redirect:/shoppingCart";
 	}
-	
+
 	// GET: Show product.
 	   @RequestMapping(value = { "/product" }, method = RequestMethod.GET)
 	   public String product(Model model, @RequestParam(value = "code", defaultValue = "") String code) {
@@ -198,14 +234,14 @@ public class MainController {
 		   model.addAttribute("productForm", productForm);
 		   return "/product";
 	   }
-	 
+
 	   // POST: Save product
 	   @RequestMapping(value = { "/product" }, method = RequestMethod.POST)
 	   public String productSave(Model model, //
 	         @ModelAttribute("productForm") @Validated ProductForm productForm, //
 	         BindingResult result, //
 	         final RedirectAttributes redirectAttributes) {
-	 
+
 	      if (result.hasErrors()) {
 	         return "/product";
 	      }
@@ -218,7 +254,7 @@ public class MainController {
 	         // Show product form.
 	         return "/product";
 	      }
-	 
+
 	      return "redirect:/productList";
 	   }
 

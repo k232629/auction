@@ -11,7 +11,7 @@
        
       <div class="page-title">Enter Customer Information</div>
        
-      <form method="POST" th:object = "${customerForm}" th:action="@{/shoppingCartCustomer}">
+     <!--  <form method="POST" th:object = "${customerForm}" th:action="@{/shoppingCartCustomer}">
           
          <table>
             <tr>
@@ -48,14 +48,47 @@
             </tr>
             <tr>
                <td>&nbsp;</td>
-               <td><input type="submit" value="Submit" /> <input type="reset"
-                  value="Reset" /></td>
+               <td><input type="submit" value="Submit" />
+               <input type="reset" value="Reset" /></td>
             </tr>
          </table>
           
-      </form>
-       
-      <th:block th:include="/_footer"></th:block>
+      </form> -->
+       <div class="container">
+			<form method="POST" th:object = "${customerForm}" th:action="@{/shoppingCartCustomer}">
+				<div class="form-group">
+					<label for="name">User Name:</label> <input th:field="*{name}" type="text"
+						class="form-control" id="name" placeholder="Enter name"
+						name="userName">
+					<span class="error-message"
+                     th:if="${#fields.hasErrors('name')}" th:errors="*{name}">..</span>
+				</div>
+				<div class="form-group">
+					<label for="name">User email:</label> <input th:field="*{email}" type="text"
+						class="form-control" id="email" placeholder="Enter email"
+						name="userName">
+					<span class="error-message"
+                     th:if="${#fields.hasErrors('email')}" th:errors="*{email}">..</span>
+				</div>
+				<div class="form-group">
+					<label for="name">User phone:</label> <input th:field="*{phone}" type="text"
+						class="form-control" id="phone" placeholder="Enter phone"
+						name="phone">
+					<span class="error-message"
+                     th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">..</span>
+				</div>
+				<div class="form-group">
+					<label for="name">User address:</label> <input th:field="*{address}" type="text"
+						class="form-control" id="address" placeholder="Enter address"
+						name="address">
+					<span class="error-message"
+                     th:if="${#fields.hasErrors('address')}" th:errors="*{address}">..</span>
+				</div>
+				<button type="submit" value="Login" class="btn btn-default">Submit</button>
+				<button type="reset" value="Reset" class="btn btn-default">Reset</button>
+			</form>
+		</div>
+      <!-- <th:block th:include="/_footer"></th:block> -->
        
    </body>
 </html>

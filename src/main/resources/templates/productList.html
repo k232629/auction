@@ -1,67 +1,52 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head>
-    <meta charset="UTF-8">
-    <title>Product List</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}"/>
-</head>
-<body>
-<th:block th:include="/_header"></th:block>
+   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+   <head>
+      <meta charset="UTF-8">
+      <title>All lots</title>
 
-<div class="page-title">Product List</div>
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+       <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
 
-<div class="product-preview-container" th:each="prodInfo : ${paginationProducts.list}">
-    <ul>
-        <li><img class="product-image"
-                 th:src="@{|/productImage?code=${prodInfo.code}|}"/></li>
-        <li>Name: <span th:utext="${prodInfo.name}"></span></li>
-        <li th:if="${!prodInfo.code.equals(codeToEdit)}">
-            Highest bid: <span th:utext="${prodInfo.price}"></span>
-        </li>
-        <li th:if="${!prodInfo.code.equals(codeToEdit)}">
-            <a th:href="@{|/placeBid?code=${prodInfo.code}|}">Bid</a>
-        </li>
-        <li th:if="${null != prodInfo.bidderCode}">
-            Bidder:
-            <span th:utext="${prodInfo.bidderCode}"></span>
-        </li>
-        <li th:if="${prodInfo.code.equals(codeToEdit)}">
-            <form th:object="${bidForm}" th:action="@{/placeBidSubmit}"
-                  method="POST" enctype="multipart/form-data">
-                <input name="code" th:value="${prodInfo.code}" type="hidden"/>
-                <input name="price" th:value="${prodInfo.price}" type="hidden"/>
-                <input name="bidderCode" th:value="${#request.userPrincipal.name}" type="hidden"/>
-                <input name="newPrice" type="text" th:value="${prodInfo.price}"/>
-                <input type="submit" value="Submit"/>
-            </form>
-        </li>
+   </head>
+   <body>
+      <th:block th:include="/_header"></th:block>
+      <th:block th:include="/_menu"></th:block>
 
-        <!-- For Manager change for 'delete lot' -->
-        <!--<th:block sec:authorize="hasAuthority('ROLE_MANAGER')">-->
-        <!--<li>-->
-        <!--<a style="color:red;"-->
-        <!--th:href="@{|/admin/product?code=${prodInfo.code}|}">Edit Product</a>-->
-        <!--</li>-->
-        <!--</th:block>-->
-    </ul>
-</div>
+      <h1>All Lots</h1>
 
-<br/>
-<div class="page-navigator" th:if="${paginationProducts.totalPages > 1}">
-    <th:block th:each="page : ${paginationProducts.navigationPages}">
+      <div class="product-preview-container" th:each="prodInfo : ${paginationProducts.list}">
+         <ul>
+            <li><img class="product-image"
+               th:src="@{|/productImage?code=${prodInfo.code}|}" /></li>
+            <li>Code: <span th:utext="${prodInfo.code}"></span></li>
+            <li>Name: <span th:utext="${prodInfo.name}"></span></li>
+            <li>Price: <span th:utext="${#numbers.formatDecimal(prodInfo.price,3,2,'COMMA')}"></span></li>
+            <li>
+               <a th:href="@{|/buyProduct?code=${prodInfo.code}|}">Buy Now</a>
+            </li>
+            <!-- For Manager edit Product -->
+            <th:block sec:authorize="hasAuthority('ROLE_MANAGER')">
+               <li>
+                 <a style="color:red;"
+                    th:href="@{|/admin/product?code=${prodInfo.code}|}">Edit Product</a>
+               </li>
+            </th:block>
+         </ul>
+      </div>
 
-        <a th:href="@{|/productList?page=${page}|}" th:if="${page != -1}"
-           class="nav-item" th:utext="${page}"></a>
+     <!--  <br/>
+      <div class="page-navigator" th:if="${paginationProducts.totalPages > 1}">
+         <th:block th:each="page : ${paginationProducts.navigationPages}">
 
-        <span class="nav-item" th:if="${page == -1}"> ... </span>
+            <a th:href="@{|/productList?page=${page}|}" th:if="${page != -1}"
+               class="nav-item" th:utext="${page}"></a>
 
-    </th:block>
-</div>
+            <span class="nav-item" th:if="${page == -1}"> ... </span>
 
-<th:block th:include="/_footer"></th:block>
+         </th:block>
+      </div> -->
 
-</body>
+
+   </body>
 </html>
