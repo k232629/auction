@@ -33,6 +33,9 @@ public class Product implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "Create_Date", nullable = false)
     private Date createDate;
+
+    @Column(name = "Bidder_Code", length = 20)
+    private String bidderCode;
  
     public Product() {
     }
@@ -76,5 +79,12 @@ public class Product implements Serializable {
     public void setImage(byte[] image) {
         this.image = image;
     }
- 
+
+    public String getBidderCode() {
+        return bidderCode;
+    }
+
+    public void setBidderCode(String bidderCode) {
+        this.bidderCode = bidderCode;
+    }
 }

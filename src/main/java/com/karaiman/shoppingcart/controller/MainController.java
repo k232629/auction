@@ -1,11 +1,14 @@
 package com.karaiman.shoppingcart.controller;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
+import com.karaiman.shoppingcart.form.BidForm;
+import com.karaiman.shoppingcart.form.ProductForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -108,25 +111,37 @@ public class MainController {
 		return "productList";
 	}
 
-	@RequestMapping({ "/buyProduct" })
-	public String listProductHandler(HttpServletRequest request, Model model, //
-			@RequestParam(value = "code", defaultValue = "") String code) {
+	@RequestMapping({ "/placeBid" })
+	public String listProductHandler(HttpServletRequest request, Model model,
+			@RequestParam(value = "code", defaultValue = "") String code,
+			@RequestParam(value = "name", defaultValue = "") String likeName,
+			@RequestParam(value = "page", defaultValue = "1") int page) {
 
-		Product product = null;
-		if (code != null && code.length() > 0) {
-			product = productDAO.findProduct(code);
+		final int maxResult = 5;
+		final int maxNavigationPage = 10;
+
+		PaginationResult<ProductInfo> result = productDAO.queryProducts(page, //
+				maxResult, maxNavigationPage, likeName);
+
+		BidForm bidForm = new BidForm();
+
+		model.addAttribute("codeToEdit", code);
+		model.addAttribute("bidForm", bidForm);
+		model.addAttribute("paginationProducts", result);
+
+		return "productList";
+	}
+
+	@RequestMapping(value = { "/placeBidSubmit" }, method = RequestMethod.POST)
+	public String listProductHandler(HttpServletRequest request, Model model,
+									 @ModelAttribute("bidForm") BidForm bidForm,
+									 BindingResult result) {
+
+		if((bidForm.getNewPrice() - bidForm.getPrice()) > 1) {
+			productDAO.saveBid(bidForm);
 		}
-		if (product != null) {
 
-			//
-			CartInfo cartInfo = Utils.getCartInSession(request);
-
-			ProductInfo productInfo = new ProductInfo(product);
-
-			cartInfo.addProduct(productInfo, 1);
-		}
-
-		return "redirect:/shoppingCart";
+		return "redirect:/productList";
 	}
 
 	@RequestMapping({ "/shoppingCartRemoveProduct" })
