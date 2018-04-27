@@ -16,7 +16,7 @@ public class PaginationResult<E> {
    private int totalPages;
  
    private int maxNavigationPage;
- 
+
    private List<Integer> navigationPages;
  
    // @page: 1, 2, ..

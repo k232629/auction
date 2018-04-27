@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.util.Date;
  
 import javax.persistence.NoResultException;
- 
+
+import com.karaiman.shoppingcart.form.BidForm;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -43,7 +44,7 @@ public class ProductDAO {
         if (product == null) {
             return null;
         }
-        return new ProductInfo(product.getCode(), product.getName(), product.getPrice());
+        return new ProductInfo(product.getCode(), product.getName(), product.getPrice(), product.getBidderCode());
     }
  
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
@@ -83,17 +84,32 @@ public class ProductDAO {
         // If error in DB, Exceptions will be thrown out immediately
         session.flush();
     }
+
+    @Transactional
+    public void saveBid(BidForm bidForm) {
+
+        Session session = this.sessionFactory.getCurrentSession();
+        String code = bidForm.getCode();
+
+        Product product = this.findProduct(code);
+
+        product.setCode(code);
+        product.setBidderCode(bidForm.getBidderCode());
+        product.setPrice(bidForm.getNewPrice());
+
+        session.flush();
+    }
  
     public PaginationResult<ProductInfo> queryProducts(int page, int maxResult, int maxNavigationPage,
             String likeName) {
         String sql = "Select new " + ProductInfo.class.getName() //
-                + "(p.code, p.name, p.price) " + " from "//
+                + "(p.code, p.name, p.price, p.bidderCode) " + " from "//
                 + Product.class.getName() + " p ";
         if (likeName != null && likeName.length() > 0) {
             sql += " Where lower(p.name) like :likeName ";
         }
         sql += " order by p.createDate desc ";
-        // 
+        //
         Session session = this.sessionFactory.getCurrentSession();
         Query<ProductInfo> query = session.createQuery(sql, ProductInfo.class);
  
