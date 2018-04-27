@@ -13,22 +13,22 @@
       <th:block th:include="/_header"></th:block>
       <th:block th:include="/_menu"></th:block>
        
-      <div class="page-title">Product List</div>
-       
+
       <div class="product-preview-container" th:each="prodInfo : ${paginationProducts.list}">
          <ul>
+            <li>Name: <span th:utext="${prodInfo.name}"></span></li>
             <li><img class="product-image"
                th:src="@{|/productImage?code=${prodInfo.code}|}" /></li>
-            <li>Name: <span th:utext="${prodInfo.name}"></span></li>
+
             <li th:if="${!prodInfo.code.equals(codeToEdit)}">
-               Highest bid: <span th:utext="${prodInfo.price}"></span>
-            </li>
-            <li th:if="${!prodInfo.code.equals(codeToEdit)}">
-               <a th:href="@{|/placeBid?code=${prodInfo.code}|}">Bid</a>
+               Highest bid: <span th:utext="${prodInfo.price}"></span> грн
             </li>
             <li th:if="${null != prodInfo.bidderCode}">
                Bidder:
                <span th:utext="${prodInfo.bidderCode}"></span>
+            </li>
+            <li th:if="${!prodInfo.code.equals(codeToEdit)}">
+               <a th:href="@{|/placeBid?code=${prodInfo.code}|}">Place your bid</a>
             </li>
             <li th:if="${prodInfo.code.equals(codeToEdit)}">
                <form th:object="${bidForm}" th:action="@{/placeBidSubmit}"
@@ -36,8 +36,8 @@
                   <input name="code" th:value="${prodInfo.code}" type="hidden" />
                   <input name="price" th:value="${prodInfo.price}" type="hidden" />
                   <input name="bidderCode" th:value="${#request.userPrincipal.name}" type="hidden" />
-                  <input name="newPrice" type="text" th:value="${prodInfo.price}"/>
-                  <input type="submit" value="Submit" />
+                  <input name="newPrice" type="text" th:value="${prodInfo.price}"/> грн
+                  <input class="btn btn-default" type="submit" value="Submit" />
                </form>
             </li>
 

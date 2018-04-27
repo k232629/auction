@@ -10,7 +10,6 @@
       <th:block th:include="/_header"></th:block>
 
        
-      <div class="page-title">Place lot</div>
       <div th:if="${errorMessage!= null}" class="error-message" th:utext="${errorMessage}">
       </div>
        
@@ -28,13 +27,6 @@
                </td>
             </tr>
             <tr>
-               <td>Image</td>
-               <td>
-                  <img th:src="@{|/productImage?code=${productForm.code}|}" width="100"/>
-               </td>
-               <td> </td>
-            </tr>
-            <tr>
                <td>Upload Image</td>
                <td><input type="file" th:field="*{fileData}" /></td>
                <td> </td>
@@ -42,8 +34,8 @@
             <tr>
                <td>&nbsp;</td>
                <td>
-                  <input type="submit" value="Submit" />
-                  <input type="reset" value="Reset" />
+                  <input class="btn btn-default" type="submit" value="Submit" />
+                  <input class="btn btn-danger" type="reset" value="Reset" />
                </td>
             </tr>
          </table>

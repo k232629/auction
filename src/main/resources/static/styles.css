@@ -83,7 +83,7 @@ body {
 }
   
 .product-preview-container input {
-    width: 50px;
+
 }
   
   
@@ -283,7 +283,6 @@ body {
 }
 
 img {
-    margin: auto;
     display: block;
 }
 
