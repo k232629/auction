@@ -1,25 +1,58 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-   <head>
-      <meta charset="UTF-8">
-      <title>Books Shop Online</title>
-      <link rel="stylesheet" type="text/css" th:href="@{/styles.css}" />
-   </head>
-   <body>
-      <th:block th:include="/_header"></th:block>
-      <th:block th:include="/_menu"></th:block>
-       
-      <div class="page-title">Shopping Cart Demo</div>
-      <div class="demo-container">
-         <h3>Demo content</h3>
-         <ul>
-            <li>Buy online</li>
-            <li>Admin pages</li>
-            <li>Reports</li>
-         </ul>
-      </div>
-       
-      <th:block th:include="/_footer"></th:block>
-       
-   </body>
+<head>
+    <meta charset="UTF-8">
+    <title>Books Shop Online</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}"/>
+
+</head>
+<body>
+<th:block th:include="/_header"></th:block>
+
+
+<div class="simblaEL containerHolder" data-drag="P0" id="P0">
+    <div class="simblaEL anchorElm" data-drag="divCounter" name="Intro0" id="Intro0"></div>
+    <div class="container-fluid minHeight100 active secondary" data-border-type="All" data-title="Container"
+         data-gradient1="#cdcfe8" data-gradient2="#424152"
+         style="min-height: 730px; display: flex; justify-content: center; flex-direction: column; text-align: center; background-image: linear-gradient(rgb(205, 207, 232), rgb(66, 65, 82)); border-radius: 0px;">
+        <div class="sDivider col-md-12 index0" data-colsize="12" data-title="Column">
+            <div class="row simblaEL rDivider" data-drag="P14" id="P14" data-title="Row">
+                <div class="sDivider col-md-3 index0" data-colsize="3" data-title="Column"
+                     style="display: table-cell;"></div>
+                <div class="sDivider col-md-6 index1" data-colsize="6" data-title="Column">
+                    <div class="row simblaEL rDivider" data-drag="P16" id="P16" data-border-type="All" data-title="Row"
+                         style="position: relative; padding-top: 20px; padding-bottom: 20px; border: 5px solid rgb(255, 255, 255); border-radius: 0px;">
+                        <div class="sDivider col-md-12 index0" data-colsize="12" data-title="Column">
+                            <div class="simblaEL tcH" data-drag="P18" id="P18">
+                                <div class="textContainer H1" style="cursor: text;">
+                                    <h1>
+                                        <div style="text-align: center;">Make a bid</div>
+                                    </h1>
+                                </div>
+                            </div>
+                            <div class="simblaEL tcH" data-drag="P20" id="P20">
+                                <div class="textContainer H3" style="cursor: text;">
+                                    <h3>
+                                        <div style="text-align: center;"><span
+                                                style="line-height: 1.1; background-color: initial;">before 17th of May</span>
+                                        </div>
+                                        <div style="text-align: center;"><span
+                                                style="line-height: 1.1; background-color: initial;"><br></span></div>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sDivider col-md-3 index2" data-colsize="3" data-title="Column"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:include="/_footer"></th:block>
+
+</body>
 </html>
