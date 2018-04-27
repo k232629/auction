@@ -38,13 +38,13 @@
                </form>
             </li>
 
-            <!-- For Manager change for 'delete lot' -->
-            <!--<th:block sec:authorize="hasAuthority('ROLE_MANAGER')">-->
-               <!--<li>-->
-                 <!--<a style="color:red;"-->
-                    <!--th:href="@{|/admin/product?code=${prodInfo.code}|}">Edit Product</a>-->
-               <!--</li>-->
-            <!--</th:block>-->
+            <!-- Manager can delete lot -->
+            <th:block sec:authorize="hasAuthority('ROLE_MANAGER')">
+               <li>
+                 <a style="color:red;"
+                    th:href="@{|/admin/deleteProduct?code=${prodInfo.code}|}">Delete</a>
+               </li>
+            </th:block>
          </ul>
       </div>
        

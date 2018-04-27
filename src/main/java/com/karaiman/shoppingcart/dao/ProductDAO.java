@@ -99,6 +99,18 @@ public class ProductDAO {
 
         session.flush();
     }
+
+    @Transactional
+    public void delete(String code) {
+
+        Session session = this.sessionFactory.getCurrentSession();
+
+        Product product = new Product();
+
+        product.setCode(code);
+
+        session.delete(product);
+    }
  
     public PaginationResult<ProductInfo> queryProducts(int page, int maxResult, int maxNavigationPage,
             String likeName) {

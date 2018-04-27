@@ -110,6 +110,14 @@ public class AdminController {
       model.addAttribute("productForm", productForm);
       return "product";
    }
+
+   // GET: Show product.
+   @RequestMapping(value = { "/admin/deleteProduct" }, method = RequestMethod.GET)
+   public String deleteProduct(Model model, @RequestParam(value = "code", defaultValue = "") String code) {
+
+      productDAO.delete(code);
+      return "redirect:productList";
+   }
  
    // POST: Save product
    @RequestMapping(value = { "/admin/product" }, method = RequestMethod.POST)
